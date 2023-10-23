@@ -1,27 +1,17 @@
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: alertmanager-config
-  namespace: thingsboard
-data:
-  config.yml: |-
-    global:
-    templates:
-    - '/etc/alertmanager/*.tmpl'
-    route:
-      receiver: alert-emailer
-      group_by: ['alertname', 'priority']
-      group_wait: 10s
-      repeat_interval: 30m
-      routes:
-        - receiver: alert-slack
-        # Send severity=slack alerts to slack.
-          match:
-            severity: slack
-          group_wait: 10s
-          repeat_interval: 10m
+route:
+    receiver: alert-emailer
+    group_by: ['alertname', 'priority']
+    group_wait: 10s
+    repeat_interval: 30m
+    routes:
+      - receiver: alert-slack
+      # Send severity=slack alerts to slack.
+        match:
+          severity: slack
+        group_wait: 10s
+        repeat_interval: 1m
  
-    receivers:
+receivers:
     - name: alert-emailer
       email_configs:
       - to: test@thingsboard.io
@@ -32,10 +22,9 @@ data:
         auth_username: test@thingsboard.io
         auth_identity: "test@thingsboard.io"
         auth_password: "test"
-
     - name: alert-slack
       slack_configs:
-      - api_url: WEB HOOK URL //test channel 
+      - api_url: WEB HOOK URL
         channel: 
         title: |-
           [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }} for {{ .CommonLabels.job }}
@@ -49,7 +38,7 @@ data:
             {{- end -}}
             )
           {{- end }}
-        text: >-
+          text: >-
           {{ range .Alerts -}}
           *Alert:* {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
 
@@ -59,6 +48,3 @@ data:
             {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
             {{ end }}
           {{ end }}
-    
-    
-    

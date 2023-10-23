@@ -16,11 +16,11 @@ metadata:
 #       nodePort: 31000
 
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   externalTrafficPolicy: Local
   selector:
     app: alertmanager
   ports:
-    - port: 80
+    - port: 9093
       targetPort: 9093
       name: alertmanager

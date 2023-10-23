@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-blackbox-exporter
+  namespace: thingsboard
+spec:
+  selector:
+    matchLabels:
+      app: prometheus-blackbox-exporter
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: prometheus-blackbox-exporter
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: blackbox-exporter
+          image: "prom/blackbox-exporter:v0.15.1"
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+          args:
+            - "--config.file=/config/blackbox.yaml"
+          resources:
+            {}
+          ports:
+            - containerPort: 9115
+              name: http
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+          volumeMounts:
+            - mountPath: /config
+              name: config
+      volumes:
+      - name: config
+        configMap:
+          name: prometheus-blackbox-exporter
+      # nodeSelector:
+      #   node-role.kubernetes.io/master: "true"
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        effect: "NoSchedule"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prometheus-blackbox-exporter
+  name: prometheus-blackbox-exporter
+  namespace: thingsboard
+  # annotations:
+  #   prometheus.io/scrape: 'true'
+spec:
+  type: ClusterIP
+  selector:
+    app: prometheus-blackbox-exporter
+  ports:
+  - name: http
+    port: 9115
+    targetPort: 9115
+    protocol: TCP
