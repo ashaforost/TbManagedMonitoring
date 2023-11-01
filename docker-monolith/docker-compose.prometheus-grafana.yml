@@ -25,6 +25,7 @@ services:
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
+    user: root
     restart: unless-stopped
     volumes:
       - /proc:/host/proc:ro
@@ -39,7 +40,7 @@ services:
       - 9100
 
   prometheus:
-    image: prom/prometheus:v2.1.0
+    image: prom/prometheus:v2.47.2
     volumes:
       - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
@@ -62,6 +63,7 @@ services:
 
   blackbox: 
     image: prom/blackbox-exporter:latest
+    user: root
     privileged: true
     volumes:
       - ./blackbox/blackbox.yml:/etc/blackbox_exporter/config.yml

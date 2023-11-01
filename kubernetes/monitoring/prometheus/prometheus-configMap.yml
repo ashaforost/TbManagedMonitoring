@@ -8,15 +8,34 @@ metadata:
 data:
   prometheus.rules: |-
     groups:
-    - name: devopscube demo alert
+    - name: STM Kalitek 
       rules:
       - alert: High Pod Memory
-        expr: sum(container_memory_usage_bytes) > 1
-        for: 1m
+        expr: (sum(container_memory_working_set_bytes{id="/"}) * 100) / sum(machine_memory_bytes) > 50
+        for: 2m
         labels:
           severity: slack
+          client: stm_kalitek
+          support: support
         annotations:
           summary: High Memory Usage
+
+
+      - alert: High Pod CPU
+        expr: sum (rate(container_cpu_usage_seconds_total{id="/"}[5m])) / sum (machine_cpu_cores{}) * 100 > 50
+        for: 5m
+        labels:
+          severity: slack
+          client: stm_kalitek
+          support: support
+        annotations:
+          summary: High CPU Usage
+
+      - alert: WEB UI Down
+        expr: probe_success{instance="http://stm.dynamik.cc"} < 1
+        for: 1m
+
+
   prometheus.yml: |-
     global:
       scrape_interval: 5s
