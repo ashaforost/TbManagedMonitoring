@@ -44,7 +44,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P1809F7CD0C75ACF3"
+        "uid": "${datasource}"
       },
       "description": "Partition utilization, disk read, disk write, download bandwidth, upload bandwidth, if there are multiple network cards or multiple partitions, it is the value of the network card or partition with the highest utilization rate collected.\n\nCurrEstab: The number of TCP connections whose current status is ESTABLISHED or CLOSE-WAIT.",
       "fieldConfig": {
@@ -423,7 +423,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": false,
           "expr": "sum(time() - node_boot_time_seconds{job=~\"$job\"}) by(kubernetes_pod_name)",
@@ -437,7 +437,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": false,
           "expr": "node_memory_MemTotal_bytes{job=~\"$job\"} - 0",
@@ -451,7 +451,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": false,
           "expr": "(1 - avg(rate(node_cpu_seconds_total{job=~\"$job\",mode=\"idle\"}[$interval])) by (instance)) * 100",
@@ -465,7 +465,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": false,
           "expr": "count(count(node_cpu_seconds_total{})by (cpu))",
@@ -479,7 +479,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": false,
           "expr": "(1 - (node_memory_MemAvailable_bytes{job=~\"$job\"} / (node_memory_MemTotal_bytes{job=~\"$job\"})))* 100",
@@ -493,7 +493,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": false,
           "expr": "max((node_filesystem_size_bytes{job=~\"$job\",fstype=~\"ext.?|xfs\"}-node_filesystem_free_bytes{job=~\"$job\",fstype=~\"ext.?|xfs\"}) *100/(node_filesystem_avail_bytes {job=~\"$job\",fstype=~\"ext.?|xfs\"}+(node_filesystem_size_bytes{job=~\"$job\",fstype=~\"ext.?|xfs\"}-node_filesystem_free_bytes{job=~\"$job\",fstype=~\"ext.?|xfs\"})))by(instance)",
@@ -507,7 +507,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": false,
           "expr": "max(rate(node_disk_read_bytes_total{job=~\"$job\"}[$interval])) by (instance)",
@@ -521,7 +521,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": false,
           "expr": "max(rate(node_disk_written_bytes_total{job=~\"$job\"}[$interval])) by (instance)",
@@ -535,7 +535,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": false,
           "expr": "node_netstat_Tcp_CurrEstab{job=~\"$job\"} - 0",
@@ -549,7 +549,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": false,
           "expr": "node_sockstat_TCP_tw{job=~\"$job\"} - 0",
@@ -563,7 +563,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": false,
           "expr": "max(rate(node_network_receive_bytes_total{job=~\"$job\"}[$interval])*8) by (instance)",
@@ -577,7 +577,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": false,
           "expr": "max(rate(node_network_transmit_bytes_total{job=~\"$job\"}[$interval])*8) by (instance)",
@@ -591,7 +591,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": false,
           "expr": "sum(kube_pod_container_resource_limits{resource=\"memory\"} ) by (node)",
@@ -605,7 +605,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": false,
           "expr": "node_filesystem_size_bytes{device=~\"^/dev/sda1\",job=\"$job\", mountpoint=\"/var\"}-node_filesystem_free_bytes{device=~\"^/dev/sda1\",job=\"$job\", mountpoint=\"/var\"}",
@@ -701,7 +701,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P1809F7CD0C75ACF3"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -783,7 +783,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "node_memory_Active_bytes{job=~\"$job\"}",
@@ -805,7 +805,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P1809F7CD0C75ACF3"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -882,7 +882,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum(rate(node_cpu_seconds_total{job=~\"$job\", mode!=\"idle\"}[$__interval])) by (instance)",
@@ -897,7 +897,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P1809F7CD0C75ACF3"
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -976,7 +976,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (container_fs_usage_bytes{device=~\"^/dev/sda1\", id=~\"/.*\"}) by (kubernetes_io_hostname)",
@@ -1004,7 +1004,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P1809F7CD0C75ACF3"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1086,7 +1086,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (machine_memory_bytes{kubernetes_io_hostname=~\"$nodename\"})",
@@ -1098,7 +1098,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "node_memory_Active_bytes{job=~\"$job\", instance=~\"$node\"}",
@@ -1110,7 +1110,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum(kube_pod_container_resource_requests{node=\"$nodename\", resource=\"memory\"}) by (node)",
@@ -1122,7 +1122,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum(kube_pod_container_resource_limits{node=\"$nodename\", resource=\"memory\"}) by (node)",
@@ -1138,7 +1138,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P1809F7CD0C75ACF3"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1217,7 +1217,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (machine_cpu_cores{kubernetes_io_hostname=~\"$nodename\"})",
@@ -1229,7 +1229,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum(rate(node_cpu_seconds_total{job=~\"$job\", mode!=\"idle\", instance=~\"$node\"}[$__interval])) by (instance)",
@@ -1240,7 +1240,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum(kube_pod_container_resource_requests{node=\"$nodename\", resource=\"cpu\"}) by (node)",
@@ -1252,7 +1252,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum(kube_pod_container_resource_limits{node=\"$nodename\", resource=\"cpu\"}) by (node)",
@@ -1336,7 +1336,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (container_fs_usage_bytes{device=~\"^/dev/sda1\", id=~\"/.*\", kubernetes_io_hostname=~\"$nodename\"})\n",
@@ -1431,7 +1431,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "rate(node_memory_Active_bytes{job=~\"$job\", instance=~\"$node\"}[$interval]) ",
@@ -1513,7 +1513,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (machine_memory_bytes{kubernetes_io_hostname=~\"$nodename\"})",
@@ -1595,7 +1595,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum(rate(node_cpu_seconds_total{job=~\"$job\", mode!=\"idle\", instance=~\"$node\"}[$__interval])) by (instance)",
@@ -1677,7 +1677,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (machine_cpu_cores{kubernetes_io_hostname=~\"$nodename\"})",
@@ -1759,7 +1759,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (container_fs_usage_bytes{device=~\"^/dev/sda1\", id=~\"/.*\", kubernetes_io_hostname=~\"$nodename\"})",
@@ -1841,7 +1841,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (container_fs_limit_bytes{device=~\"^/dev/sda.$\",kubernetes_io_hostname=~\"$nodename\"})",
@@ -1958,7 +1958,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",name=~\".*\",kubernetes_io_hostname=~\"^gke-tb-.*\"}[$interval]))by(pod)  ",
@@ -2076,7 +2076,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (rate (container_cpu_usage_seconds_total{ role=~\"main\", pod!=\"\", kubernetes_io_hostname=~\"^gke-tb-.*\"}[$interval])) by (pod)",
@@ -2195,7 +2195,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (rate (container_cpu_usage_seconds_total{container!=\"\",kubernetes_io_hostname=~\"$nodename\"}[$interval])) by (kubernetes_io_hostname, container)",
@@ -2311,7 +2311,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (rate (container_cpu_usage_seconds_total{id!=\"/.*\",kubernetes_io_hostname=~\"$nodename\"}[$interval])) by (id)",
@@ -2426,7 +2426,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (container_memory_working_set_bytes{image!=\"\",name=~\"^.*\",kubernetes_io_hostname=~\"$nodename\"}) by (pod)",
@@ -2539,7 +2539,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (container_memory_working_set_bytes{namespace!= \"thingsboard\", role=\"main\",pod!=\"\",kubernetes_io_hostname=~\"^gke-tb-.*\"}) by (pod)",
@@ -2655,7 +2655,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (container_memory_working_set_bytes{image!=\"\",container!=\"POD\",kubernetes_io_hostname=~\"$nodename\"}) by (container, pod)",
@@ -2670,7 +2670,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (container_memory_working_set_bytes{container!=\"\",kubernetes_io_hostname=~\"$nodename\"}) by (kubernetes_io_hostname, pod)",
@@ -2783,7 +2783,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (container_memory_working_set_bytes{id!=\"/.*\",kubernetes_io_hostname=~\"$nodename\"}) by (id)",
@@ -2896,7 +2896,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (rate (container_network_receive_bytes_total{image!=\"\",name=~\"^.*\",kubernetes_io_hostname=~\"^gke-tb-.*\"}[$interval])) by (pod)",
@@ -2911,7 +2911,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "- sum (rate (container_network_transmit_bytes_total{image!=\"\",name=~\"^.*\",kubernetes_io_hostname=~\"^gke-tb-.*\"}[$interval])) by (pod)",
@@ -3023,7 +3023,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (rate (container_network_receive_bytes_total{kubernetes_io_hostname=~\"$nodename\"}[$interval]))",
@@ -3038,7 +3038,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "- sum (rate (container_network_transmit_bytes_total{kubernetes_io_hostname=~\"$nodename\"}[$interval]))",
@@ -3151,7 +3151,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (rate (container_network_receive_bytes_total{image!=\"\",name=~\"^.*\",kubernetes_io_hostname=~\"$nodename\"}[$interval])) by (container, pod)",
@@ -3167,7 +3167,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "- sum (rate (container_network_transmit_bytes_total{image!=\"\",name=~\"^.*\",kubernetes_io_hostname=~\"$nodename\"}[$interval])) by (container, pod)",
@@ -3183,7 +3183,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (rate (container_network_receive_bytes_total{image!=\"\",name!~\"^.*\",kubernetes_io_hostname=~\"$nodename\"}[$interval])) by (kubernetes_io_hostname, name, image)",
@@ -3199,7 +3199,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "- sum (rate (container_network_transmit_bytes_total{image!=\"\",name!~\"^.*\",kubernetes_io_hostname=~\"$nodename\"}[$interval])) by (kubernetes_io_hostname, name, image)",
@@ -3313,7 +3313,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "sum (rate (container_network_receive_bytes_total{id!=\"/.*\",kubernetes_io_hostname=~\"$nodename\"}[$interval])) by (id)",
@@ -3328,7 +3328,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "- sum (rate (container_network_transmit_bytes_total{id!=\"/.*\",kubernetes_io_hostname=~\"$nodename\"}[$interval])) by (id)",
@@ -3451,7 +3451,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "P1809F7CD0C75ACF3"
+          "uid": "${datasource}"
         },
         "definition": "label_values(node_uname_info, job)",
         "hide": 0,
@@ -3478,7 +3478,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "P1809F7CD0C75ACF3"
+          "uid": "${datasource}"
         },
         "definition": "label_values(node_uname_info{job=~\"$job\"}, nodename)",
         "hide": 0,
@@ -3513,7 +3513,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "P1809F7CD0C75ACF3"
+          "uid": "${datasource}"
         },
         "definition": "label_values(node_uname_info{job=~\"$job\",nodename=~\"$nodename\"},instance)",
         "hide": 1,
@@ -3541,7 +3541,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "P1809F7CD0C75ACF3"
+          "uid": "${datasource}"
         },
         "definition": "",
         "hide": 0,

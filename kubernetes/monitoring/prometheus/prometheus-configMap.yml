@@ -11,29 +11,23 @@ data:
     - name: STM Kalitek 
       rules:
       - alert: High Pod Memory
-        expr: (sum(container_memory_working_set_bytes{id="/"}) * 100) / sum(machine_memory_bytes) > 50
-        for: 2m
-        labels:
-          severity: slack
-          client: stm_kalitek
-          support: support
+        expr: (sum(container_memory_working_set_bytes{id="/"}) * 100) / sum(machine_memory_bytes) > 80
+        for: 5m
         annotations:
-          summary: High Memory Usage
+          summary: Memory usage exceeds 80% for 5 minutes;
 
 
       - alert: High Pod CPU
-        expr: sum (rate(container_cpu_usage_seconds_total{id="/"}[5m])) / sum (machine_cpu_cores{}) * 100 > 50
+        expr: sum (rate(container_cpu_usage_seconds_total{id="/"}[5m])) / sum (machine_cpu_cores{}) * 100 > 80
         for: 5m
-        labels:
-          severity: slack
-          client: stm_kalitek
-          support: support
         annotations:
-          summary: High CPU Usage
+          summary: CPU usage exceeds 80% for 5 minutes;
 
       - alert: WEB UI Down
-        expr: probe_success{instance="http://stm.dynamik.cc"} < 1
+        expr: min(probe_success)<1
         for: 1m
+        annotations:
+          summary: WEB UI probe failed
 
 
   prometheus.yml: |-

@@ -44,7 +44,7 @@ scrape_configs:
     static_configs:
      - targets: ['localhost:9090']
 
-  - job_name: 'Client Name'
+  - job_name: Actuator
     metrics_path: /actuator/prometheus
     static_configs:
       - targets: [ 'localhost:8080' ]
@@ -53,7 +53,7 @@ scrape_configs:
     static_configs:
       - targets: ['node-exporter:9100']
 
-  - job_name: 'blackbox'
+  - job_name: --Client Name
     # scheme: http
     metrics_path: /probe
     params:
