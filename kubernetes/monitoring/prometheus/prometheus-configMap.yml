@@ -41,7 +41,7 @@ data:
       - scheme: http
         static_configs:
         - targets:
-          - "alertmanager.monitoring.svc:9093"
+          - "alertmanager:9093"
 
     scrape_configs:
     
