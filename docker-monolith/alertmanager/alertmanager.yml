@@ -5,7 +5,7 @@ route:
   receiver: alert-slack
   group_interval: 1m
   group_wait: 10s
-  repeat_interval: 1m
+  repeat_interval: 48h
   group_by: ['alertname', 'priority']
 receivers:
     - name: alert-slack
@@ -14,7 +14,7 @@ receivers:
           api_url: 'WEB_HOOK_URL'
           channel:
           title: |-
-            [{{ .Status | toUpper }}] {{ .CommonLabels.alertname }} for {{ .CommonLabels.job }}
+            [{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}
           text: >-
             {{ range .Alerts -}}
 
